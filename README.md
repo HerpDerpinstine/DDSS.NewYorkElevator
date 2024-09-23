@@ -1,5 +1,5 @@
 # DDSS.NewYorkElevator
-Restores the Elevator to the New York office in Dale & Dawson
+Restores the Elevator to the New York office in [Dale & Dawson Stationery Supplies](https://store.steampowered.com/app/2920570/Dale__Dawson_Stationery_Supplies/)
 
 - Elevator might be a little buggy, report any issues experienced here
 - Warehouse Break Room currently just has some chairs

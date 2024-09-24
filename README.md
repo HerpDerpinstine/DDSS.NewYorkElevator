@@ -2,8 +2,7 @@
 Restores the Elevator to the New York office in [Dale & Dawson Stationery Supplies](https://store.steampowered.com/app/2920570/Dale__Dawson_Stationery_Supplies/)
 
 - Elevator might be a little buggy, report any issues experienced here
-- Warehouse Break Room currently just has some chairs
-- No Elevator Tasks currently but they might get restored in a future Mod version
+- Warehouse Office Workstation and Tasks aren't restored but might in a future version
 - This is mostly for the novelty of having an Elevator and Warehouse again
 
 
@@ -12,15 +11,18 @@ Restores the Elevator to the New York office in [Dale & Dawson Stationery Suppli
 ### REQUIREMENTS:
 
 - [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) v0.6.5 or higher.
+- [DDSS.ModHelper](https://github.com/HerpDerpinstine/DDSS.ModHelper/releases)
 
 ---
 
 ### INSTALLATION:
 
 1) Install [MelonLoader](https://github.com/LavaGang/MelonLoader/releases) v0.6.5 or higher.
-2) Download [DDSS.NewYorkElevator](https://github.com/HerpDerpinstine/DDSS.NewYorkElevator/releases) from Releases.
-3) Place ``DDSS.NewYorkElevator.dll`` in the ``Mods`` folder of your Game's Install Folder.
-4) Start the Game.
+2) Download [DDSS.ModHelper](https://github.com/HerpDerpinstine/DDSS.ModHelper/releases)
+3) Place ``DDSS.ModHelper.dll`` in the ``Mods`` folder of your Game's Install Folder.
+4) Download [DDSS.NewYorkElevator](https://github.com/HerpDerpinstine/DDSS.NewYorkElevator/releases) from Releases.
+5) Place ``DDSS.NewYorkElevator.dll`` in the ``Mods`` folder of your Game's Install Folder.
+6) Start the Game.
 
 ---
 

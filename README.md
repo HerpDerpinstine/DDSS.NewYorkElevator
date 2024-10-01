@@ -28,6 +28,6 @@ Restores the Elevator to the New York office in [Dale & Dawson Stationery Suppli
 
 ### LICENSING & CREDITS:
 
-DDSS.NewYorkElevator is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/HerpDerpinstine/DDSS.NewYorkElevator/blob/master/LICENSE.md) for the full License.
+DDSS.NewYorkElevator is licensed under the Apache License, Version 2.0. See [LICENSE](https://github.com/HerpDerpinstine/DDSS.NewYorkElevator/blob/main/LICENSE.md) for the full License.
 
 DDSS.NewYorkElevator is not affiliated with Striped Panda Studios or [Dale & Dawson Stationery Supplies](https://store.steampowered.com/app/2920570/Dale__Dawson_Stationery_Supplies/) in any way.

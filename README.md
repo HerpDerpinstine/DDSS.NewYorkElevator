@@ -5,6 +5,7 @@ Restores the Elevator to the New York office in [Dale & Dawson Stationery Suppli
 - Warehouse Office Workstation and Tasks aren't restored but might in a future version
 - This is mostly for the novelty of having an Elevator and Warehouse again
 
+* Discord: https://discord.gg/JDw423Wskf
 
 ---
 

@@ -15,7 +15,7 @@ namespace DDSS_NewYorkElevator
         public override void OnInitializeMelon()
         {
             _logger = LoggerInstance;
-
+            
             ApplyPatch<Patch_ElevatorController>();
 
             _logger.Msg("Initialized");
@@ -60,8 +60,11 @@ namespace DDSS_NewYorkElevator
                 Transform signObjUpper = elevator.upperDoor.transform.Find("Plane/Service");
                 if (signObjUpper != null)
                     UnityEngine.Object.Destroy(signObjUpper.parent.gameObject);
-            }
 
+                // Fix Room Manager Listing
+
+                // Fix Map Listing
+            }
         }
 
         private void ApplyPatch<T>()

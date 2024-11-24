@@ -17,8 +17,10 @@ namespace DDSS_NewYorkElevator.Patches
         [HarmonyPatch(typeof(ElevatorController), nameof(ElevatorController.Start))]
         private static bool Start_Prefix(ElevatorController __instance)
         {
-            // Start Movement Coroutine
+            // Fix Target Height
             __instance.targetElevatorHeight = __instance.maxElevatorHeight;
+
+            // Start Movement Coroutine
             if (__instance.isServer)
                 __instance.StartCoroutine(MovementCoroutine(__instance));
 
@@ -35,7 +37,8 @@ namespace DDSS_NewYorkElevator.Patches
             float lowerFloorY = currentPos.y + controller.minElevatorHeight + -controller.maxElevatorHeight;
 
             // Infinite Loop
-            while (true)
+            while ((controller != null)
+                && !controller.WasCollected)
             {
                 // Check for Floor Changes
                 if (controller.requests.Count <= 0)
@@ -53,8 +56,11 @@ namespace DDSS_NewYorkElevator.Patches
                     continue;
                 }
 
-                MelonMain._logger.Msg($"Requested Floor: {_requestedFloor}");
-                MelonMain._logger.Msg("Moving...");
+                if (MelonMain.DEBUG)
+                {
+                    MelonMain._logger.Msg($"Requested Floor: {_requestedFloor}");
+                    MelonMain._logger.Msg("Moving...");
+                }
 
                 // Apply Floor Indicators
                 foreach (ElevatorLevelIndicator indicator in controller.minLevelIndicator)
@@ -100,7 +106,8 @@ namespace DDSS_NewYorkElevator.Patches
                 // Wait for Stop
                 //yield return new WaitForSeconds(1f);
                 controller.NetworkisMoving = false;
-                MelonMain._logger.Msg("Opening Doors...");
+                if (MelonMain.DEBUG)
+                    MelonMain._logger.Msg("Opening Doors...");
 
                 // Check Upper Floor Door
                 if (_requestedFloor == _upperFloor)
@@ -122,7 +129,8 @@ namespace DDSS_NewYorkElevator.Patches
                 yield return new WaitForSeconds(3f);
 
                 // Apply Floor
-                MelonMain._logger.Msg($"Moved to Floor: {_requestedFloor}");
+                if (MelonMain.DEBUG)
+                    MelonMain._logger.Msg($"Moved to Floor: {_requestedFloor}");
                 _currentFloor = _requestedFloor;
                 yield return null;
             }

@@ -8,6 +8,8 @@ namespace DDSS_NewYorkElevator
 {
     internal class MelonMain : MelonMod
     {
+        internal const bool DEBUG = true;
+
         internal static MelonLogger.Instance _logger;
 
         public override void OnInitializeMelon()
@@ -23,7 +25,7 @@ namespace DDSS_NewYorkElevator
         {
             // Check for New York office Scene
             if (sceneName != "Level_0")
-                    return;
+                return;
 
             // Enable Movers
             ElevatorMover[] elevatorMoverArr = Resources.FindObjectsOfTypeAll<ElevatorMover>();

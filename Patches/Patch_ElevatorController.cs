@@ -4,9 +4,11 @@ using UnityEngine;
 using DDSS_ModHelper.Utils;
 using System.Collections;
 using Il2Cpp;
+using Il2CppMirror;
 
 namespace DDSS_NewYorkElevator.Patches
 {
+    [HarmonyPatch]
     internal class Patch_ElevatorController
     {
         private const int _lowerFloor = 0;
@@ -17,11 +19,13 @@ namespace DDSS_NewYorkElevator.Patches
         [HarmonyPatch(typeof(ElevatorController), nameof(ElevatorController.Start))]
         private static bool Start_Prefix(ElevatorController __instance)
         {
+            __instance.enabled = true;
+
             // Fix Target Height
             __instance.targetElevatorHeight = __instance.maxElevatorHeight;
 
             // Start Movement Coroutine
-            if (__instance.isServer)
+            if (NetworkServer.activeHost)
                 __instance.StartCoroutine(MovementCoroutine(__instance));
 
             // Prevent Original
@@ -54,12 +58,6 @@ namespace DDSS_NewYorkElevator.Patches
                 {
                     yield return null;
                     continue;
-                }
-
-                if (MelonMain.DEBUG)
-                {
-                    MelonMain._logger.Msg($"Requested Floor: {_requestedFloor}");
-                    MelonMain._logger.Msg("Moving...");
                 }
 
                 // Apply Floor Indicators
@@ -102,12 +100,7 @@ namespace DDSS_NewYorkElevator.Patches
 
                     yield return null;
                 }
-
-                // Wait for Stop
-                //yield return new WaitForSeconds(1f);
                 controller.NetworkisMoving = false;
-                if (MelonMain.DEBUG)
-                    MelonMain._logger.Msg("Opening Doors...");
 
                 // Check Upper Floor Door
                 if (_requestedFloor == _upperFloor)
@@ -129,8 +122,6 @@ namespace DDSS_NewYorkElevator.Patches
                 yield return new WaitForSeconds(3f);
 
                 // Apply Floor
-                if (MelonMain.DEBUG)
-                    MelonMain._logger.Msg($"Moved to Floor: {_requestedFloor}");
                 _currentFloor = _requestedFloor;
                 yield return null;
             }

@@ -1,22 +1,21 @@
-﻿using DDSS_NewYorkElevator.Patches;
+﻿using HarmonyLib;
 using Il2CppProps.Elevator;
 using MelonLoader;
 using System;
+using System.Reflection;
 using UnityEngine;
 
 namespace DDSS_NewYorkElevator
 {
     internal class MelonMain : MelonMod
     {
-        internal const bool DEBUG = true;
-
         internal static MelonLogger.Instance _logger;
 
         public override void OnInitializeMelon()
         {
             _logger = LoggerInstance;
-            
-            ApplyPatch<Patch_ElevatorController>();
+
+            ApplyPatches();
 
             _logger.Msg("Initialized");
         }
@@ -60,24 +59,31 @@ namespace DDSS_NewYorkElevator
                 Transform signObjUpper = elevator.upperDoor.transform.Find("Plane/Service");
                 if (signObjUpper != null)
                     UnityEngine.Object.Destroy(signObjUpper.parent.gameObject);
-
-                // Fix Room Manager Listing
-
-                // Fix Map Listing
             }
         }
 
-        private void ApplyPatch<T>()
+        private void ApplyPatches()
         {
-            Type type = typeof(T);
-            try
+            Assembly melonAssembly = typeof(MelonMain).Assembly;
+            foreach (Type type in melonAssembly.GetValidTypes())
             {
-                HarmonyInstance.PatchAll(type);
-            }
-            catch (Exception e)
-            {
-                LoggerInstance.Error($"Exception while attempting to apply {type.Name}: {e}");
+                // Check Type for any Harmony Attribute
+                if (type.GetCustomAttribute<HarmonyPatch>() == null)
+                    continue;
+
+                // Apply
+                try
+                {
+                    if (MelonDebug.IsEnabled())
+                        LoggerInstance.Msg($"Applying {type.Name}");
+
+                    HarmonyInstance.PatchAll(type);
+                }
+                catch (Exception e)
+                {
+                    LoggerInstance.Error($"Exception while attempting to apply {type.Name}: {e}");
+                }
             }
         }
-    }   
+    }
 }
